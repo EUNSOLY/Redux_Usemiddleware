@@ -3,6 +3,7 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { RootState } from "./reducers";
 import axios from "axios";
+import { fetchPosts } from "./reducers/actions/posts";
 type Props = {
   value: any;
   onIncrement: () => void;
@@ -36,14 +37,7 @@ function App({ value, onIncrement, onDcrement }: Props) {
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
-  const fetchPosts = (): any => {
-    return async function fetchPostsThunk(dispatch: any, getState: any) {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      dispatch({ type: "FETCH_POSTS", payload: response.data });
-    };
-  };
+
   return (
     <div className="App">
       {/* Clickd : {value}times */}
